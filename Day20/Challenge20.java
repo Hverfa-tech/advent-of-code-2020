@@ -63,19 +63,15 @@ public class Challenge20 {
 			for(int j=0; j<tileMatrix1.length; j++) {
 				s1_1 += tileMatrix1[0][j];
 			}
-			StringBuilder sb = new StringBuilder(s1_1);
 			for(int j=0; j<tileMatrix1.length; j++) {
 				s2_1 += tileMatrix1[j][tileMatrix1.length-1];
 			}
-			sb = new StringBuilder(s2_1);
 			for(int j=0; j<tileMatrix1.length; j++) {
 				s3_1 += tileMatrix1[tileMatrix1.length-1][j];
 			}
-			sb = new StringBuilder(s3_1);
 			for(int j=0; j<tileMatrix1.length; j++) {
 				s4_1 += tileMatrix1[j][0];
 			}
-			sb = new StringBuilder(s4_1);
 			int countS1 = 0, countS2 = 0, countS3 = 0, countS4 = 0;
 			for(Map.Entry<String, String[][]> entry2 : tiles.entrySet()) {
 				String tileName2 = entry2.getKey().split(" ")[1].split(":")[0];
@@ -93,7 +89,7 @@ public class Challenge20 {
 					for(int j=0; j<tileMatrix2.length; j++) {
 						s1_2 += tileMatrix2[0][j];
 					}
-					sb = new StringBuilder(s1_2);
+					StringBuilder sb = new StringBuilder(s1_2);
 					s1_2_reversed = sb.reverse().toString();
 					for(int j=0; j<tileMatrix2.length; j++) {
 						s2_2 += tileMatrix2[j][tileMatrix2.length-1];
