@@ -72,9 +72,6 @@ public class Challenge19 {
         System.out.println(messages.stream().filter(a -> a.matches(patternFinal)).count());
         
         // PART 2
-        rules.put("8", "42 | 42 8");
-        rules.put("11", "42 31 | 42 11 31");
-
         findModifiedRules();
 	}
 
@@ -110,7 +107,54 @@ public class Challenge19 {
 	}
 	
 	private static void findModifiedRules() {
+		// Change rules
+        rules.put("8", "42 | 42 8");
+        rules.put("11", "42 31 | 42 11 31");
+        
+        /*
+         * Consider only rule 42 and rule 31
+         */
+        String rule42 = findRules("42", rules.get("42"), "");
+        if(!matches.contains(rule42)) {
+			matches.add(rule42);
+		}
+		if(matches.size() > 1) {
+			matches.set(matches.size()-1, matches.get(matches.size()-1)+")");
+		}
 		
+		String r42 = "";
+		for(String s : matches) {
+			r42 += s;
+		}
+		r42 = r42.replaceAll(" ", "");
+		
+		matches = new ArrayList<>();
+        String rule31 = findRules("31", rules.get("31"), "");
+        if(!matches.contains(rule31)) {
+			matches.add(rule31);
+		}
+		if(matches.size() > 1) {
+			matches.set(matches.size()-1, matches.get(matches.size()-1)+")");
+		}
+		String r31 = "";		
+		for(String s : matches) {
+			r31 += s;
+		}
+		r31 = r31.replaceAll(" ", "");
+
+		// Compose the regex for rule0
+		String masterRegex = "^((42+) ((42 31) | (42{2} 31{2}) | (42{3} 31{3}) | (42{4} 31{4}) | (42{5} 31{5}) | (42{6} 31{6}) | (42{7} 31{7}) | (42{8} 31{8}) | (42{9} 31{9}) | (42{10} 31{10})))$";
+		masterRegex = masterRegex.replace("42", r42).replace("31", r31).replace(" ", "");
+
+		// Count matches
+        int count = 0;
+        for (String m : messages) {
+          if (m.matches(masterRegex)) {
+            count++;
+          }
+        }
+
+        System.out.println(count);
 	}
 	
 }
